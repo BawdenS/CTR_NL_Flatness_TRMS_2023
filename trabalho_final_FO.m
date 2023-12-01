@@ -1,5 +1,3 @@
-
-
 linearizacao_planta
 % saida plana 
 syms fo1 d1fo1 d2fo1 d3fo1 fo2 d1fo2 d2fo2 d3fo2
@@ -71,71 +69,9 @@ FO2 = simplify(alpha_2*FO(2))
    X1 = X(1,1); X2 = X(2,1); X3 = X(3,1);
    %%
    U1 = collect(X(4,1),[fo1 d1fo1 d2fo1 d3fo1]); 
-   X4 = X(5,1); X5 = X(6,1); X = X(3,1);
+   X4 = X(5,1); X5 = X(6,1); X6 = X(7,1);
    %%
-   U1 = collect(X(4,1),[fo1 d1fo1 d2fo1 d3fo1]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   U2 = collect(X(8,1),[fo2 d1fo2 d2fo2 d3fo2]);
 
 
 
