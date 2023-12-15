@@ -77,7 +77,7 @@ linSys = nlSys_jacobian*[sX1; sX2; sX3; sX4; sX5; sX6; sU1; sU2];
   syms d1Xd d2Xd d1Yd d2Yd d1Psid d1Vd d1U1d d1U2d d2U1d d2U2d
   syms beta gama
   syms sX sY sPsi sV sU1 sU2
-  syms sX sY sPsi sV sU1 sU2
+  syms sX1 sX2 sX3 sX4 sX5 sX6 sU1 sU2
   syms a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15 a16 a17 a18
   syms a19 a20 a21 a22 a23 a24 a25 a26 a27 a28 a29 a30 a31 a32
   syms d1a1 d1a2 d1a3 d1a4 d1a5 d1a6 d1a7 d1a8 d1a9 d1a10 d1a11 d1a12
@@ -131,14 +131,14 @@ linSys = nlSys_jacobian*[sX1; sX2; sX3; sX4; sX5; sX6; sU1; sU2];
    SF1 = [a1 a2 a3 a4 a5 a6]*[sX1; sX2; sX3; sX4; sX5; sX6]; 
    d1SF1 = [a7 a8 a9 a10 a11 a12]*[sX1; sX2; sX3; sX4; sX5; sX6];
    d2SF1 = [a13 a14 a15 a16 a17 a18]*[sX1; sX2; sX3; sX4; sX5; sX6];
-   d3SF1 = [a19 a20 a21 a22 a23 a24]*[sX1; sX2; sX3; sX4; sX5; sX6];
-   d4SF1 = [a25 a26 a27 a28 a29 a30 a31 a32]*[sX1; sX2; sX3; sX4; sX5; sX6 ;sU1 ;sU2];
+   d3SF1 = [a19 a20 a21 a22 a23 a24 a25 a26]*[sX1; sX2; sX3; sX4; sX5; sX6;sU1 ;sU2];
+%    d4SF1 = [a25 a26 a27 a28 a29 a30 a31 a32]*[sX1; sX2; sX3; sX4; sX5; sX6 ;sU1 ;sU2];
    
    SF2 = [g1 g2 g3 g4 g5 g6]*[sX1; sX2; sX3; sX4; sX5; sX6]; 
    d1SF2 = [g7 g8 g9 g10 g11 g12]*[sX1; sX2; sX3; sX4; sX5; sX6];
    d2SF2 = [g13 g14 g15 g16 g17 g18]*[sX1; sX2; sX3; sX4; sX5; sX6];
-   d3SF2 = [g19 g20 g21 g22 g23 g24]*[sX1; sX2; sX3; sX4; sX5; sX6];
-   d4SF2 = [g25 g26 g27 g28 g29 g30 g31 g32]*[sX1; sX2; sX3; sX4; sX5; sX6;sU1 ;sU2];
+   d3SF2 = [g19 g20 g21 g22 g23 g24 g25 g26]*[sX1; sX2; sX3; sX4; sX5; sX6;sU1 ;sU2];
+%    d4SF2 = [g25 g26 g27 g28 g29 g30 g31 g32]*[sX1; sX2; sX3; sX4; sX5; sX6;sU1 ;sU2];
    
    
    % Primeira Derivadas
@@ -150,40 +150,37 @@ linSys = nlSys_jacobian*[sX1; sX2; sX3; sX4; sX5; sX6; sU1; sU2];
 
    % Segunda Derivada
      SF1_gLh1 = gradient(d1sF1,[sX1 sX2 sX3 sX4 sX5 sX6 a7 a8 a9 a10 a11 a12]); SF1_gLh1 = transpose(SF1_gLh1);                
-     d2sF1    = collect(simplify(SF1_gLh1*[linSys; d1a7; d1a8; d1a9; d1a10; d1a11; d1a12]),[sX1 sX2 sX3 sX4 sX5 sX6]); c_d2SF1 = gradient(d2sF1,[sX1 sX2 sX3 sX4 sX5 sX6]);
+     d2sF1    = collect(simplify(SF1_gLh1*[linSys; d1a7; d1a8; d1a9; d1a10; d1a11; d1a12]),[sX1 sX2 sX3 sX4 sX5 sX6]); c_d2sF1 = gradient(d2sF1,[sX1 sX2 sX3 sX4 sX5 sX6]);
      
      SF2_gLh1 = gradient(d1sF2,[sX1 sX2 sX3 sX4 sX5 sX6 g7 g8 g9 g10 g11 g12]); SF2_gLh1 = transpose(SF2_gLh1);                
-     d2sF2    = collect(simplify(SF2_gLh1*[linSys; d1g7; d1g8; d1g9; d1g10; d1g11; d1g12]),[sX1 sX2 sX3 sX4 sX5 sX6]); c_d2SF2 = gradient(d2sF2,[sX1 sX2 sX3 sX4 sX5 sX6]);
-     
-     
+     d2sF2    = collect(simplify(SF2_gLh1*[linSys; d1g7; d1g8; d1g9; d1g10; d1g11; d1g12]),[sX1 sX2 sX3 sX4 sX5 sX6]); c_d2sF2 = gradient(d2sF2,[sX1 sX2 sX3 sX4 sX5 sX6]);
+      
    % Terceira Derivadas
      SF1_gLh2 = gradient(d2sF1,[sX1 sX2 sX3 sX4 sX5 sX6 a13 a14 a15 a16 a17 a18]); SF1_gLh2 = transpose(SF1_gLh2);                
-     d3sF1    = collect(simplify(SF1_gLh2*[linSys; d1a13; d1a14; d1a15; d1a16; d1a17; d1a18]),[sX1 sX2 sX3 sX4 sX5 sX6]); c_d3sF1 = gradient(d3sF1,[sX1 sX2 sX3 sX4 sX5 sX6]);
+     d3sF1    = collect(simplify(SF1_gLh2*[linSys; d1a13; d1a14; d1a15; d1a16; d1a17; d1a18]),[sX1 sX2 sX3 sX4 sX5 sX6]); c_d3sF1 = gradient(d3sF1,[sX1 sX2 sX3 sX4 sX5 sX6 sU1 sU2]);
     
      SF2_gLh2 = gradient(d2sF2,[sX1 sX2 sX3 sX4 sX5 sX6 g13 g14 g15 g16 g17 g18]); SF2_gLh2 = transpose(SF2_gLh2);                
-     d3sF2    = collect(simplify(SF2_gLh2*[linSys; d1g13; d1g14; d1g15; d1g16; d1g17; d1g18]),[sX1 sX2 sX3 sX4 sX5 sX6]); c_d3sF2 = gradient(d3sF2,[sX1 sX2 sX3 sX4 sX5 sX6]); 
+     d3sF2    = collect(simplify(SF2_gLh2*[linSys; d1g13; d1g14; d1g15; d1g16; d1g17; d1g18]),[sX1 sX2 sX3 sX4 sX5 sX6]); c_d3sF2 = gradient(d3sF2,[sX1 sX2 sX3 sX4 sX5 sX6 sU1 sU2]); 
 
-   % Quarta Derivada
-     SF1_gLh3 = gradient(d3sF1,[sX1 sX2 sX3 sX4 sX5 sX6 a19 a20 a21 a22 a23 a24]); SF1_gLh3 = transpose(SF1_gLh3);                
-     d4sF1    = collect(simplify(SF1_gLh3*[linSys; d1a19; d1a20; d1a21; d1a22; d1a23; d1a24]),[sX1 sX2 sX3 sX4 sX5 sX6 sU1 sU2]); c_d4SF1 = gradient(d4sF1,[sX1 sX2 sX3 sX4 sX5 sX6 sU1 sU2]);
-     
-     SF2_gLh3 = gradient(d3sF2,[sX1 sX2 sX3 sX4 sX5 sX6 g19 g20 g21 g22 g23 g24]); SF2_gLh3 = transpose(SF2_gLh3);                
-     d4sF2    = collect(simplify(SF2_gLh3*[linSys; d1g19; d1g20; d1g21; d1g22; d1g23; d1g24]),[sX1 sX2 sX3 sX4 sX5 sX6 sU1 sU2]); c_d4SF2 = gradient(d4sF2,[sX1 sX2 sX3 sX4 sX5 sX6 sU1 sU2]);
-     
+%    % Quarta Derivada
+%      SF1_gLh3 = gradient(d3sF1,[sX1 sX2 sX3 sX4 sX5 sX6 a19 a20 a21 a22 a23 a24]); SF1_gLh3 = transpose(SF1_gLh3);                
+%      d4sF1    = collect(simplify(SF1_gLh3*[linSys; d1a19; d1a20; d1a21; d1a22; d1a23; d1a24]),[sX1 sX2 sX3 sX4 sX5 sX6 sU1 sU2]); c_d4sF1 = gradient(d4sF1,[sX1 sX2 sX3 sX4 sX5 sX6 sU1 sU2]);
+%      
+%      SF2_gLh3 = gradient(d3sF2,[sX1 sX2 sX3 sX4 sX5 sX6 g19 g20 g21 g22 g23 g24]); SF2_gLh3 = transpose(SF2_gLh3);                
+%      d4sF2    = collect(simplify(SF2_gLh3*[linSys; d1g19; d1g20; d1g21; d1g22; d1g23; d1g24]),[sX1 sX2 sX3 sX4 sX5 sX6 sU1 sU2]); c_d4sF2 = gradient(d4sF2,[sX1 sX2 sX3 sX4 sX5 sX6 sU1 sU2]);
+%      
      
      
      
      
      
  % Matriz M que relaciona as saídas planas incrementais e suas derivadas temporais com as variáveis incrementais do sistema linearizado
-    % M = [a1  a2  a3  a4   a5  a6  0    0;
+    % M = [a1  a2  a3  a4  a5  a6   0    0;
     %      a7  a8  a9  a10 a11 a12  0    0;
     %      a13 a14 a15 a16 a17 a18  0    0;
-    %      a19 a20 a21 a22 a23 a24  0    0;
-    %      a25 a26 a27 a28 a29 a30 a31 a32;
-    
-    %      g1  g2  g3  g4   g5  g6  0   0;
-    %      g7  g8   g9  g10 g11 g12 0   0;
+    %      a19 a20 a21 a22 a23 a24  a25  a26;
+   
+    %      g1  g2  g3  g4  g5  g6  0    0;
+    %      g7  g8  g9  g10 g11 g12 0    0;
     %      g13 g14 g15 g16 g17 g18  0    0;
-    %      g19 g20 g21 g22 g23 g24  0    0;
-    %      g25 g26 g27 g28 g29 g30 g31 g32];
+    %      g19 g20 g21 g22 g23 g24  g25  g26];
