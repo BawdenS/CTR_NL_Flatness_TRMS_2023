@@ -97,5 +97,5 @@ C1z=1.6*(z^2-1.95*z+0.99)/((z-1)*z)
 
 C2z=80*(z-0.9)^2*(z-0.98)/((z-1)*(z-0.4)^2);
 % sisotool(Gz(2,2),C2z)
-simulacao = "Lab14ContDisc_2018a";
+simulacao = "Lab14ContDisc_2018a1";
 out = sim(simulacao);

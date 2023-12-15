@@ -8,20 +8,19 @@
 % Pré-Comandos
   close all; clear all; clc
 
-% Parâmetros do Modelo
-  beta = 0.07; gama = 0.58;
+%   180 - pi
+%   10  - X
+% Condições Iniciais do Sistema                                   
+  psi0 = 0*pi/180; psip0= 0; yaw0 = 0; yawp = 0; tau10 = 0; tau20 = 0;
   
-% Condições Iniciais do Sistema
-  x0 = 0; y0 = 0; psi0 = pi/3; v0 = 0;                                      
-  psi = 0; psip= 0; yaw = 0; yawp = 0; tau1 = 0; tau2 = 0;
 % Tempo de Simulação
-  t0 = 0; dt = 0.01; tfinal = 20;
+  t0 = 0; dt = 0.01;    tfinal= 20;
   t = t0:dt:tfinal; st = size(t,2);
   
 % Planejamento de Trajetória
 
   % Saídas do Sistema (X e Y)
-  
+  psi=0;psip=0;yaw=0;
     % Trajetória Circular
     Psid = 0*t; Psipd = 0*t; Yawd =0*t; Yawpd = 0*t;Tau1d = 0*t; Tau2d = 0*t;
     x1d = Psid; x2d = Psipd; x3d = Yawd; x4d = Yawpd; x5d = Tau1d; x6d = Tau2d;
@@ -39,18 +38,20 @@
 % Acompanhamento de Trajetória
 
   % Parâmetros do Controlador - U1 e U2
-    p1 = 0.25; P1 = poly(-[p1 p1 p1]);  K31 = 1; K21 = P1(1,2); K11 = P1(1,3); K01 = P1(1,4);
-    p2 = 0.25; P2 = poly(-[p2 p2 p2]); K32 = 1;K22 = P2(1,2); K12 = P2(1,3); K02 = P1(1,4);
+    p1 = 0.5; P1 = poly(-[p1 p1 p1]);  K21 = P1(1,2); K11 = P1(1,3); K01 = P1(1,4);
+    p2 = 0.5; P2 = poly(-[p2 p2 p2]);  K22 = P2(1,2); K12 = P2(1,3); K02 = P1(1,4);
 
   % Saturação dos Atuadores
-    limU1_sup = 20; limU1_inf = -20;
-    limU2_sup = 20; limU2_inf = -20;
+    limU1_sup = 255; limU1_inf = -255;
+    limU2_sup = 255; limU2_inf = -255;
   
 % Simulink
   disp('Simulink - Navio de Superfície MIMO Não-Linear (Dinâmica Simplificada)');
  
   % Executando a simulação e apresentando os resultados
     open_system('nSimples_flatness'); 
-    sim('nSimples_flatness'); 
+    sim('nSimples_flatness');
+%     open_system('teste_ignore_simulink');
+%     sim('teste_ignore_simulink'); 
 %     plotResultados;
 
