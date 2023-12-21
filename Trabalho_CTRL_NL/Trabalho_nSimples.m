@@ -11,10 +11,10 @@
 %   180 - pi
 %   10  - X
 % Condições Iniciais do Sistema                                   
-  psi0 = 0*pi/180; psip0= 0; yaw0 = 0; yawp = 0; tau10 = 0; tau20 = 0;
+  psi0 = 3*pi/180; psip0= 0; yaw0 = 0; yawp = 0; tau10 = 0; tau20 = 0;
   
 % Tempo de Simulação
-  t0 = 0; dt = 0.01;    tfinal= 20;
+  t0 = 0; dt = 0.01;    tfinal= 100;
   t = t0:dt:tfinal; st = size(t,2);
   
 % Planejamento de Trajetória
@@ -39,7 +39,7 @@
 
   % Parâmetros do Controlador - U1 e U2
     p1 = 0.5; P1 = poly(-[p1 p1 p1]);  K21 = P1(1,2); K11 = P1(1,3); K01 = P1(1,4);
-    p2 = 0.5; P2 = poly(-[p2 p2 p2]);  K22 = P2(1,2); K12 = P2(1,3); K02 = P1(1,4);
+    p2 = 10; P2 = poly(-[p2 p2 p2]);  K22 = P2(1,2); K12 = P2(1,3); K02 = P1(1,4);
 
   % Saturação dos Atuadores
     limU1_sup = 255; limU1_inf = -255;

@@ -149,17 +149,17 @@ linSys = nlSys_jacobian*[sX1; sX2; sX3; sX4; sX5; sX6; sU1; sU2];
      d1sF2    = collect(simplify(SF2_gLh0*[linSys; d1g1; d1g2; d1g3; d1g4; d1g5; d1g6]),[sX1 sX2 sX3 sX4 sX5 sX6]); c_d1sF2 = gradient(d1sF2,[sX1 sX2 sX3 sX4 sX5 sX6]); 
 
    % Segunda Derivada
-     SF1_gLh1 = gradient(d1sF1,[sX1 sX2 sX3 sX4 sX5 sX6 a7 a8 a9 a10 a11 a12]); SF1_gLh1 = transpose(SF1_gLh1);                
+     SF1_gLh1 = gradient(d1SF1,[sX1 sX2 sX3 sX4 sX5 sX6 a7 a8 a9 a10 a11 a12]); SF1_gLh1 = transpose(SF1_gLh1);                
      d2sF1    = collect(simplify(SF1_gLh1*[linSys; d1a7; d1a8; d1a9; d1a10; d1a11; d1a12]),[sX1 sX2 sX3 sX4 sX5 sX6]); c_d2sF1 = gradient(d2sF1,[sX1 sX2 sX3 sX4 sX5 sX6]);
      
-     SF2_gLh1 = gradient(d1sF2,[sX1 sX2 sX3 sX4 sX5 sX6 g7 g8 g9 g10 g11 g12]); SF2_gLh1 = transpose(SF2_gLh1);                
+     SF2_gLh1 = gradient(d1SF2,[sX1 sX2 sX3 sX4 sX5 sX6 g7 g8 g9 g10 g11 g12]); SF2_gLh1 = transpose(SF2_gLh1);                
      d2sF2    = collect(simplify(SF2_gLh1*[linSys; d1g7; d1g8; d1g9; d1g10; d1g11; d1g12]),[sX1 sX2 sX3 sX4 sX5 sX6]); c_d2sF2 = gradient(d2sF2,[sX1 sX2 sX3 sX4 sX5 sX6]);
       
    % Terceira Derivadas
-     SF1_gLh2 = gradient(d2sF1,[sX1 sX2 sX3 sX4 sX5 sX6 a13 a14 a15 a16 a17 a18]); SF1_gLh2 = transpose(SF1_gLh2);                
+     SF1_gLh2 = gradient(d2SF1,[sX1 sX2 sX3 sX4 sX5 sX6 a13 a14 a15 a16 a17 a18]); SF1_gLh2 = transpose(SF1_gLh2);                
      d3sF1    = collect(simplify(SF1_gLh2*[linSys; d1a13; d1a14; d1a15; d1a16; d1a17; d1a18]),[sX1 sX2 sX3 sX4 sX5 sX6]); c_d3sF1 = gradient(d3sF1,[sX1 sX2 sX3 sX4 sX5 sX6 sU1 sU2]);
     
-     SF2_gLh2 = gradient(d2sF2,[sX1 sX2 sX3 sX4 sX5 sX6 g13 g14 g15 g16 g17 g18]); SF2_gLh2 = transpose(SF2_gLh2);                
+     SF2_gLh2 = gradient(d2SF2,[sX1 sX2 sX3 sX4 sX5 sX6 g13 g14 g15 g16 g17 g18]); SF2_gLh2 = transpose(SF2_gLh2);                
      d3sF2    = collect(simplify(SF2_gLh2*[linSys; d1g13; d1g14; d1g15; d1g16; d1g17; d1g18]),[sX1 sX2 sX3 sX4 sX5 sX6]); c_d3sF2 = gradient(d3sF2,[sX1 sX2 sX3 sX4 sX5 sX6 sU1 sU2]); 
 
 %    % Quarta Derivada
